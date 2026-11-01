@@ -1,0 +1,12 @@
+drop policy if exists "Public can read approved knowledge" on public.knowledge_entries;
+drop policy if exists "Users can read own knowledge submissions" on public.knowledge_entries;
+drop policy if exists "Admins can read all knowledge" on public.knowledge_entries;
+create policy "Knowledge visible to approved authors and admins" on public.knowledge_entries for select to anon,authenticated using(status='approved' or (auth.uid() is not null and author_id=(select auth.uid())) or (auth.uid() is not null and (select public.is_shaxai_admin())));
+drop policy if exists "Admins can manage admin roles" on public.admin_roles;
+drop policy if exists "Admins read own role" on public.admin_roles;
+create policy "Users and admins can read role records" on public.admin_roles for select to authenticated using(user_id=(select auth.uid()) or (select public.is_shaxai_admin()));
+create policy "Admins insert role records" on public.admin_roles for insert to authenticated with check((select public.is_shaxai_admin()));
+create policy "Admins update role records" on public.admin_roles for update to authenticated using((select public.is_shaxai_admin())) with check((select public.is_shaxai_admin()));
+create policy "Admins delete role records" on public.admin_roles for delete to authenticated using((select public.is_shaxai_admin()));
+create index if not exists messages_user_id_idx on public.messages(user_id);
+create index if not exists knowledge_reviewed_by_idx on public.knowledge_entries(reviewed_by);
