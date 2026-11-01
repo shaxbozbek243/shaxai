@@ -21,7 +21,7 @@ export default {
     if (request.method !== "POST" || !["/api/chat", "/v1/chat/completions"].includes(url.pathname))
       return json({ error: { message: "Not found", type: "not_found_error" } }, 404, headers);
 
-    const supabaseKey = env.SUPABASE_ANON_KEY || env.SUPABASE_PUBLISHABLE_KEY || "sb_publishable_KrXV25Sj2pjpQaFO1UBPsQ_1pvqjMXP";
+    const supabaseKey = env.SUPABASE_ANON_KEY || env.SUPABASE_PUBLISHABLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6Y2tkY295bGh5ZGF1ZXJuaGpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM1MDI0NzEsImV4cCI6MjEwOTA3ODQ3MX0.cr7LGsy2Hpuf-earsTHHr1wjmRaS5QJGfckEkEBXaNM";
     if (!env.GROQ_API_KEY || !env.SUPABASE_URL || !supabaseKey)
       return json({ error: { message: "Server sozlamalari to‘liq emas." } }, 503, headers);
 
