@@ -14,7 +14,10 @@ create table public.api_keys (
 create index api_keys_user_created_idx on public.api_keys(user_id, created_at desc);
 alter table public.api_keys enable row level security;
 revoke all on public.api_keys from anon, authenticated;
-grant select, insert, delete on public.api_keys to authenticated;
+grant select (id,user_id,name,key_prefix,created_at,last_used_at) on public.api_keys to authenticated;
+grant insert (user_id,name,key_prefix,key_hash) on public.api_keys to authenticated;
+grant delete on public.api_keys to authenticated;
+revoke execute on function public.validate_shaxai_api_key(text) from authenticated;
 create policy "Users read their own API keys" on public.api_keys for select to authenticated using ((select auth.uid()) = user_id);
 create policy "Users create their own API keys" on public.api_keys for insert to authenticated with check ((select auth.uid()) = user_id);
 create policy "Users revoke their own API keys" on public.api_keys for delete to authenticated using ((select auth.uid()) = user_id);
