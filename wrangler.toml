@@ -4,4 +4,4 @@ compatibility_date = "2026-11-01"
 [vars]
 SUPABASE_URL = "https://czckdcoylhydauernhjr.supabase.co"
 ALLOWED_ORIGIN = "*"
-# Set GROQ_API_KEY and SUPABASE_ANON_KEY as Cloudflare Worker secrets.
+# Set GROQ_API_KEY as a Cloudflare Worker secret. Supabase anon key fallback is in worker.js.
