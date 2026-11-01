@@ -1,0 +1,2 @@
+// Browser-visible configuration only. Never put Groq or service-role secrets here.
+window.SHAXAI_CONFIG={SUPABASE_URL:"https://czckdcoylhydauernhjr.supabase.co",SUPABASE_KEY:"sb_publishable_KrXV25Sj2pjpQaFO1UBPsQ_1pvqjMXP",CHAT_API_URL:"/api/chat"};
